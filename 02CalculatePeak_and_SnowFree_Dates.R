@@ -23,19 +23,22 @@ syear=min(Yind)
 snowpeaks = rep(1,length(Yind))
 PeakSWEday = rep(1,length(Yind))
 PeakSWEDate = rep(1,length(Yind))
-
+ZeroSWEday = rep(1,length(Yind))
 ##
 ## Loop to calculate similar quantities on all years
 
 for(t in 1:length(Yind)){
   Yt = t-1+syear #Yt used to just convert from timestep of loop (t) to a year
   snowpeaks[t]=max(SWE[wateryear==(Yt)]) #within each wateryear calculate max SWE
-  tempdate =rDate[wateryear==(Yt)] #assign a temporary date (this wateryear)
-  PeakSWEday[t]=max((tempdate[SWE[wateryear==Yt]==(snowpeaks[t])])) #calculate the LATEST date of max SWE within this year
-  
+  tempdate =rDate[wateryear==Yt] #assign a temporary date (this wateryear)
+  tempSWE =SWE[wateryear==Yt] #Assign a temporary SWE for this wateryear
+  PeakSWEday[t]=max((tempdate[tempSWE==(snowpeaks[t])])) #calculate the LATEST date of max SWE within this year
+  postPeakdate = tempdate[tempdate>PeakSWEday[t]] #limit to dates AFTER peak SWE
+  postPeakSWE = tempSWE[tempdate>PeakSWEday[t]] #limit to dates AFTER peak SWE
+  ZeroSWEday[t]=min((postPeakdate[postPeakSWE==(0)])) #minimum(first) date where SWE =0, after peak
 }
 PeakSWEDate=as.Date(PeakSWEday,origin = "1970-01-01") #convert dates into rDate format
+ZeroSWEdate=as.Date(ZeroSWEday,origin = "1970-01-01") #convert dates into rDate format
+doyPeakSWE= as.numeric(strftime(PeakSWEDate, format = "%j")) #convert to Day of Year
+doyZeroSWE= as.numeric(strftime(ZeroSWEdate, format = "%j")) #convert to Day of Year
 
-snowpeaks=max(SWE[wateryear==1994+1])
-tempdate =rDate[wateryear==1994+1]
-PeakSWEday = max((tempdate[SWE[wateryear==1994+1]==(snowpeaks)]))
