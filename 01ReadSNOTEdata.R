@@ -10,21 +10,30 @@ rDate=as.Date(SNOWnwt$Date)
 Year=as.numeric(format(rDate, "%Y"))
 
 #calculating annual snow totals
-snowpeaks_ann=tapply(SNOWnwt$Snow.Water.Equivalent..in.,fdate,max)
-snowsum_ann=tapply(SNOWnwt$Snow.Water.Equivalent..in.,fdate,sum)
-barplot(tapply(snowpeaks_ann,Year,mean))
+snowpeaks_ann=tapply(SNOWnwt$SWE_in,Year,max)
+snowsum_ann=tapply(SNOWnwt$SWE_in,Year,sum)
+
+
+Yind=(min(wateryear):max(wateryear))
+barplot(tapply(SNOWnwt$SWE_in,Year,sum))
 
 #defining the wateryear and waterdate
-waterdate=SNOWnwt$rDate+90
+waterdate=rDate+90
 wateryear=as.numeric(format(waterdate, "%Y"))
 
 #caculate wateryear snow totals
-snowpeaks=tapply(SNOWnwt$Snow.Water.Equivalent..in.,wateryear,max)
-snowsum=tapply(SNOWnwt$Snow.Water.Equivalent..in.,wateryear,sum)
+snowpeaks=tapply(SNOWnwt$SWE_in,wateryear,max)
+snowsum=tapply(SNOWnwt$SWE_in,wateryear,sum)
+prec_acc=tapply(SNOWnwt$PrecAcc_in,wateryear,sum)
+
 
 #simple plots
-barplot(tapply(snowpeaks,wateryear,mean))
+barplot(tapply(SNOWnwt$SWE_in,wateryear,max))
 plot(snowsum,snowpeaks)
 
-#TO DO merge new data vectors to SNOWnwt and store for later use
+#quick plot showing how cummulative SWE for the year and water year differ
+plot(snowsum_ann,prec_acc)
+
+
+#TO DO: I've made a mess and made a lot of variables in the global environment  merge new data vectors to SNOWnwt and store for later use
 
