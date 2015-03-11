@@ -22,7 +22,7 @@ syear=min(Yind)
 #allocate size of each of the quantities to be calculated
 snowpeaks = rep(1,length(Yind))
 PeakSWEday = rep(1,length(Yind))
-PeakSWEDate = rep(1,length(Yind))
+#PeakSWEDate = rep(1,length(Yind))
 ZeroSWEday = rep(1,length(Yind))
 ##
 ## Loop to calculate similar quantities on all years

@@ -14,12 +14,14 @@ snowpeaks_ann=tapply(SNOWnwt$SWE_in,Year,max)
 snowsum_ann=tapply(SNOWnwt$SWE_in,Year,sum)
 
 
-Yind=(min(wateryear):max(wateryear))
-barplot(tapply(SNOWnwt$SWE_in,Year,sum))
 
 #defining the wateryear and waterdate
 waterdate=rDate+90
 wateryear=as.numeric(format(waterdate, "%Y"))
+
+
+Yind=(min(wateryear):max(wateryear))
+barplot(tapply(SNOWnwt$SWE_in,Year,sum))
 
 #caculate wateryear snow totals
 snowpeaks=tapply(SNOWnwt$SWE_in,wateryear,max)
