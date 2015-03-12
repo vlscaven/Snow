@@ -10,18 +10,17 @@ setwd("C:/Users/dmoore1/Dropbox/rProjectsShare/Snow/data/FluxData/") #Dave's dat
 
 #Remove ALL DATAFRAMES FROM THE ENVIRIONMENT 
 rm (list=ls()) #the only way I could work out how to bind all the new files together is to create a list of all dataframes in the environment after the loop | for safety I clear all variables at the outset.
-
-#Column Names for Ameriflux format - took list from Francesc's code
-AmerifluxCols = list("YEAR", "GAP", "DTIME", "DOY", "HRMIN", "UST", "TA", "WD", "WS", "NEE", "FC", "SFC", "H", "SH", "LE", "SLE", "FG", "TS1", "TSdepth1", "TS2", "TSdepth2", "PREC", "RH", "PRESS", "CO2", "VPD", "SWC1", "SWC2", "Rn", "PAR", "Rg", "Rgdif", "PARout", "RgOut", "Rgl", "RglOut", "H2O", "RE", "GPP", "CO2top", "CO2height", "APAR", "PARdif", "APARpct", "ZL")
-#note it would be better to read the list of column names from a file rather than hardcoding them
+# 
 
 # read all the .csv files in the working directory (L2 gap filled) available for NR1 (1998-2013)
 tempFilelist = list.files(pattern="*.csv")
 
-#loop through each element of the list of files and assigns 
-for (i in 1:length(tempFilelist)) {
-  assign(substr(tempFilelist[i], 5, 14), read.csv(tempFilelist[i],skip=20,header=FALSE))  
+#loop through each element of the list of files and assigns until length(tempFilelist)
+#can't figure out how to read lines 18 and 19 as headers using this approach
+for (i in 1:2) {
+  assign(substr(tempFilelist[i], 5, 14), read.csv(tempFilelist[i],skip=19,header=FALSE, na.strings=c('-9999','-6999'), stringsAsFactors=FALSE))  
 }
+
 
 #custom function that returns a list of all dataframes in the environment
 #function origin:Bill Dunlap http://comments.gmane.org/gmane.comp.lang.r.general/312495 
@@ -43,15 +42,22 @@ allDataFrames <- finddataframes(globalenv()) # or just finddataframes()
 assign(substr(tempFilelist[1], 5, 9), do.call("rbind", allDataFrames))
 
 #name that I just assigned to the dataframe
-CombinedDataFrame=substr(temp[i], 5, 9)
+CombinedDataFrame=substr(tempFilelist[1], 5, 9)
+
+#Read header from file
+AmFluxheader=read.csv(tempFilelist[1],skip=17, nrows=1 ,header=FALSE, na.strings=c('-9999','-6999'),stringsAsFactors=FALSE)
+AmerifluxCols = as.list(AmFluxheader)
+
+#Read Units
+AmFluxUnits= read.csv(tempFilelist[i],skip=18, nrows=1 ,header=FALSE, na.strings=c('-9999','-6999'), stringsAsFactors=FALSE)
+
 
 #add column names to new dataframe
-#hard coding the name of the dataframe works fine
 colnames(USNR1) <- AmerifluxCols #works but I'd rather not hard code 'USNR1'
 
-#attempt to add list of colnames to combined dataframe
-#colnames(eval(CombinedDataFrame))=AmerifluxCols # error
-#I think I have to use assign and do.call again INSTEAD of colnames;
 
-# assign(substr(temp[1], 5, 9), do.call("colnames", AmerifluxCols)) #gives an error
+#     save (USNR1, file="USNR1_cat.dat", ascii = TRUE)
+#     write.csv(USNR1, file="USNR1.csv", quote=FALSE, row.names=FALSE)
+#     save(USNR1, file="USNR1.rda")
+
 
