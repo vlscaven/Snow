@@ -1,4 +1,4 @@
-#Purpose: To read a set of L2 Ameriflux files and cat them together
+#Purpose: To read a set of L2 Ameriflux files and concatenate them together
 #Author: davidjpmoore@email.arizona.edu
 #Date: 03/11/2015
 #to do - generalize code to create a function where you could pass the working directory and output the concantenated file.
@@ -18,7 +18,7 @@ tempFilelist = list.files(path = "data/FluxData/",pattern="*.csv")
 
 #loop through each element of the list of files and assigns until length(tempFilelist)
 #can't figure out how to read lines 18 and 19 as headers using this approach
-for (i in 1:3) {
+for (i in 1:length(tempFilelist)) {
   assign(substr(tempFilelist[i], 5, 14), read.csv(file = paste0("data/FluxData/",tempFilelist[i]),skip=20,header=FALSE, na.strings=c('-9999','-6999'), stringsAsFactors=FALSE))  
 }
 
@@ -59,21 +59,10 @@ colnames(AmFluxUnits)=AmerifluxCols
 colnames(aggFluxtemp) <- AmerifluxCols #works but I'd rather not hard code 'USNR1'
 assign(substr(tempFilelist[1], 5, 9), aggFluxtemp)
 
+####################################################
+#### save(USNR1,file="data/FluxData/USNR1.rda") ####
+####################################################
+
 #     save (USNR1, file="USNR1_cat.dat", ascii = TRUE)
 #     write.csv(USNR1, file="USNR1.csv", quote=FALSE, row.names=FALSE)
 #     save(USNR1, file="USNR1.rda")
-
-#Creating output file for EddyData
-# 
-# Year  DoY	Hour	NEE	LE	H	Rg	Tair	Tsoil	rH	VPD	Ustar
-# -	-	-	umolm-2s-1	Wm-2	Wm-2	Wm-2	degC	degC	%	hPa	ms-1
-# 1998	1	0.5	-1.21	1.49	-11.77	0	7.4	4.19	55.27	4.6	0.72
-# 1998	1	1	1.72	3.8	-13.5	0	7.5	4.2	55.95	4.6	0.52
-# 1998	1	1.5	-9999	1.52	-18.3	0	7.1	4.22	57.75	4.3	0.22
-# 1998	1	2	-9999	3.94	-17.47	0	6.6	4.23	60.2	3.9	0.2
-# 1998	1	2.5	2.55	8.3	-21.42	0	6.6	4.22	59.94	3.9	0.33
-# 
-# Eddyout = c(aggFluxtemp$Year)
-
-
-
