@@ -10,12 +10,13 @@
 # }
 # plot(N)
 
+#setwd("D:/Dropbox/rProjectsShare/Snow/data/FluxData/") 
 #define object SWE as the SWE in Inches from the SNOWnwt dataframe
 SWE = SNOWnwt$SWE_in
 #define Yind (year index) from the first to the last Water Year
 Yind=(min(wateryear):max(wateryear))
 #limits
-N0=min(Yind)
+
 NT=max(Yind)
 #define starting year
 syear=min(Yind)
@@ -42,3 +43,7 @@ ZeroSWEdate=as.Date(ZeroSWEday,origin = "1970-01-01") #convert dates into rDate 
 doyPeakSWE= as.numeric(strftime(PeakSWEDate, format = "%j")) #convert to Day of Year
 doyZeroSWE= as.numeric(strftime(ZeroSWEdate, format = "%j")) #convert to Day of Year
 
+#Saved 4 columns Yind, PeakSWEdate, ZeroSWEDate and MaxSWE_in(snowpeaks renamed) 
+# keeps=c("Yind", "PeakSWEDate", "ZeroSWEDate", "MaxSWE_in")
+#  SNOTELsummary=SNOTELtotals[keeps]
+#  save(SNOTELsummary,file="data/SNOTELsummary.rda")
