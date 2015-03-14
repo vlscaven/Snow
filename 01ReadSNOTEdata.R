@@ -1,4 +1,8 @@
-
+#Purpose: To load the SNOTEL DATA INTO A DATAFRAME
+#Author : Dave Moore
+#Date: 03/13/2015
+#
+#
 #load data using read table into a dataframe called "SNOWnwt"
 SNOWnwt = read.table("data/SNOTELNiwot Tue Mar 10 2015.txt", head=TRUE, sep=",")
 #SNOTELNiwot Tue Mar 10 2015.txt was downloaded from SNOTEL site see README file
