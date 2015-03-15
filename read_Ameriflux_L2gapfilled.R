@@ -99,8 +99,6 @@ DoY = aggFluxtemp$DOY
   H4_Frac = as.numeric(substr(H2,3,4))/60
   Hour = H3_hr+H4_Frac;
 
-Hour = aggFluxtemp$HRMIN
-
 # Year  DoY  Hour  NEE  LE	H	Rg	Tair	Tsoil	rH	VPD	Ustar
 # -	-	-	umolm-2s-1	Wm-2	Wm-2	Wm-2	degC	degC	%	hPa	ms-1
 NEE =aggFluxtemp$NEE
@@ -116,20 +114,20 @@ Ustar = aggFluxtemp$UST
 #Write header required for EddyProc 
 
 #Create dataframe
-EddyProcHead = c("Year",  "DoY",  "Hour",  "NEE",  "LE",  "H",	"Rg",	"Tair",	"Tsoil",	"rH",	"VPD",	"Ustar")
+EddyProcHead = data.frame("Year",  "DoY",  "Hour",  "NEE",  "LE",  "H",	"Rg",	"Tair",	"Tsoil",	"rH",	"VPD",	"Ustar")
 #Write to file
-write.table(EddyProcHead, file = paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), col.names=FALSE, sep="\t",append=T)
+write.table(EddyProcHead, file = paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), row.names = F, col.names=F, quote = F, sep="\t",append=F)
 
 
 #Write header2 (units) required for EddyProc & append to the file 
 #Create dataframe
-EddyProcunits =c("-", "-", "-",  "umolm-2s-1",  "Wm-2",  "Wm-2",	"Wm-2",	"degC",	"degC",	"%",	"hPa",	"ms-1")
+EddyProcunits =data.frame("-", "-", "-",  "umolm-2s-1",  "Wm-2",  "Wm-2",	"Wm-2",	"degC",	"degC",	"%",	"hPa",	"ms-1")
 #write to file
-write.table(EddyProcunits, paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), col.names=FALSE, sep="\t",append=T)
+write.table(EddyProcunits, paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), row.names = F, col.names=FALSE,quote = F, sep="\t",append=T)
 
 #Write aata required for EddyProc & append to the file
 #create dataframe
 EddyProcDataFrame = data.frame(Year,  DoY,  Hour,  NEE,  LE,	H,	Rg,	Tair,	Tsoil,	rH,	VPD,	Ustar)
 #write to file
-write.table(EddyProcDataFrame, paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), col.names=FALSE, sep="\t",append=T)
+write.table(EddyProcDataFrame, paste0("data/EddyProcInput/",substr(tempFilelist[1], 5, 9),".txt"), row.names = F, col.names=FALSE, sep="\t",append=T)
 
