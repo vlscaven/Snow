@@ -26,3 +26,5 @@ Day1 = ISOdate(year,1,1) #- 1  #cause dave might be wrong
 
 #calculate the number of days from Jan 1 of the year to the measurement date
 Doy = rDate - Day1
+
+#It is Dave's Birthday in 44 minutes!!!
