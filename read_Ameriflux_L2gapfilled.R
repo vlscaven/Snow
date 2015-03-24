@@ -25,8 +25,8 @@ tempFilelist = list.files(path = "data/FluxData/",pattern="*.csv")
 
 #loop through each element of the list of files and assigns until length(tempFilelist)
 #can't figure out how to read lines 18 and 19 as headers using this approach
-#for (i in 1:2) {
-for (i in 1:length(tempFilelist)) {
+for (i in 1:2) {
+#for (i in 1:length(tempFilelist)) {
     
   assign(substr(tempFilelist[i], 5, 14), read.csv(file = paste0("data/FluxData/",tempFilelist[i]),skip=20,header=FALSE, na.strings=c('-9999','-6999'), stringsAsFactors=FALSE))  
 }
