@@ -1,3 +1,6 @@
+
+#CHECK UNITS
+
 #Purpose: To read a set of L2 Ameriflux files and concatenate them together and save as dot.rda file with the site name | also creates dot.txt file suitable for later processing with EddyProc 
 #
 
@@ -22,8 +25,8 @@ tempFilelist = list.files(path = "data/FluxData/",pattern="*.csv")
 
 #loop through each element of the list of files and assigns until length(tempFilelist)
 #can't figure out how to read lines 18 and 19 as headers using this approach
-for (i in 1:2) {
-#for (i in 1:length(tempFilelist)) {
+#for (i in 1:2) {
+for (i in 1:length(tempFilelist)) {
     
   assign(substr(tempFilelist[i], 5, 14), read.csv(file = paste0("data/FluxData/",tempFilelist[i]),skip=20,header=FALSE, na.strings=c('-9999','-6999'), stringsAsFactors=FALSE))  
 }
@@ -71,6 +74,11 @@ assign(substr(tempFilelist[1], 5, 9), aggFluxtemp)
 ####################################################
 
 save(aggFluxtemp, file=paste0("data/FluxData/",substr(tempFilelist[1], 5, 9),".rda"))
+
+
+
+aggFluxtemp <- aggFluxtemp[order(USNR1$YEAR,USNR1$DOY),]
+tcheckdiff = diff(USNR1$HRMIN, lag=1)
 
 
 #####################################################
