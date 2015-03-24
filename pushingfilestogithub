@@ -1,0 +1,15 @@
+#to commit code to the github
+#YOU WILL NEED YOUR GITHUB USERNAME AND PASSWORD
+# USING RStudio
+# click ‘git’ and ‘commit’
+# select files to commit
+# write commit description
+# click "commit"
+# click PUSH - enter your username and password
+
+#if you have problems with pushing in Rstudio you can push manually using a TERMINAL or BASH
+# CD to your repository directory
+# if you don’t know what the directory is – then in Rstudio – type getwd() and the director will be printed on screen
+# type  
+#	git push
+# git will request your username and password
