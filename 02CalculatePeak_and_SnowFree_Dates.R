@@ -30,7 +30,8 @@ PrecAcc_in_total = rep(1,length(Yind))
 ##
 ## Loop to calculate similar quantities on all years
 
-for(t in 1:length(Yind)){
+#correction -1 to avoid warning message
+for(t in 1:length(Yind)-1){
   Yt = t-1+syear #Yt used to just convert from timestep of loop (t) to a year
   snowpeaks[t]=max(SWE[wateryear==(Yt)]) #within each wateryear calculate max SWE
   PrecAcc_in_total[t]=max(PrecAcc_in[wateryear==(Yt)])
