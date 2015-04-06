@@ -18,6 +18,7 @@ Year_inc1 = Yind[1981<Yind]
 #define SnowMeltWindow
 SnowMeltWindow=SNOTELsummary$PeakSWEDate-SNOTELsummary$ZeroSWEdate
 SnowMeltWindow[SNOTELsummary$Yind>1981]
+SNOTELsummary$SnowMeltWindow<-SnowMeltWindow
 abs(SnowMeltWindow[SNOTELsummary$Yind>1981])
 SnowMeltWindow1<-abs(SnowMeltWindow[SNOTELsummary$Yind>1981])
 SnowMeltWindow1
@@ -76,8 +77,28 @@ par(new=F)
 > lines(rnorm(100),col=3)
 
 #playing around
-plot(biomassYear, snowpeak[Yind<2013],type="l", col="red")
+plot(biomassYear, snowpeaks[Yind<2013],type="l", col="red")
 lines(Biomass, type="l", col="blue")
 
+SnowMeltWindow1
+abs(SnowMeltWindow1)
+plot(biomassYear, SnowMeltWindow_inc, type="l", col="black")
+lines(biomassYear, Biomass, type="l", col="green")
+
+#fix SnowMeltWindow1 to have same number of variables as in biomassYear
+SnowMeltWindow<-(SnowMeltWindow[SNOTELsummary$Yind>1981,<2013])
+
+plot(Yind, snowpeaks, type="l",col="red")
+lines(Yind, SNOTELsummary$SnowMeltWindow, type="l", col="green")
+
+> lines(Biomass, type="l", col="blue")
+> lines(biomassYear,Biomass, type="l", col="blue")
 
 
+plot(Yind, snowpeaks, type="l", col="red")
+par(new=T)
+plot(SNOTELsummary$SnowMeltWindow, type="l", col="green")
+par(new=F)
+
+plot(biomassYear, Biomass, type="l", col="blue")
+lines
