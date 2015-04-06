@@ -15,7 +15,30 @@ maxYearINCnwt= max(YearINCnwt)
 snowpeaks_inc1 = snowpeaks[1981<Yind]
 SnowMeltWindow1 = SnowMeltWindow[1981<Yind]
 Year_inc1 = Yind[1981<Yind]
+#define SnowMeltWindow
+SnowMeltWindow=SNOTELsummary$PeakSWEDate-SNOTELsummary$ZeroSWEdate
+SnowMeltWindow[SNOTELsummary$Yind>1981]
+abs(SnowMeltWindow[SNOTELsummary$Yind>1981])
+SnowMeltWindow1<-abs(SnowMeltWindow[SNOTELsummary$Yind>1981])
+SnowMeltWindow1
 
 snowpeaks_inc = snowpeaks_inc1[Year_inc1<maxYearINCnwt+1]
 SnowMeltWindow_inc = SnowMeltWindow1[Year_inc1<maxYearINCnwt+1]
 Year_inc = Year_inc1[Year_inc1<(maxYearINCnwt+1)]
+snowpeaks_inc
+SnowMeltWindow_inc
+INCnwt$Year
+
+#extract biomass data from 1981-2012
+RelTreeRingData<-INCnwt$all[INCnwt$Year>1980]
+RelTreeRingData
+plot(RelTreeRingData)
+plot(INCnwt$Year[INCnwt$Year>1980], RelTreeRingData)
+Biomass<-RelTreeRingData
+biomassYear<-INCnwt$Year[INCnwt$Year>1980]
+plot(INCnwt$Year[INCnwt$Year>1980], Biomass)
+plot(INCnwt$Year[INCnwt$Year>1980], Biomass)
+plot(Biomass, snowpeaks[Yind<2013])
+plot(Yind, snowpeaks)
+plot(biomassYear, Biomass)
+#need to take 2013-2015 out of snowpeaks to be able to plot against biomass, biomass only goes through 2012
