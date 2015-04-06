@@ -67,9 +67,9 @@ lines(datavector2,type="l",col=3)
 > plot(rnorm(30),type="b",axes=F,col=3)
 > par(new=F)
 #playing around 
-plot(biomassYear, snowpeaks[Yind<2013], type="l", col="red")
+plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue")
 par(new=T)
-plot(Biomass, type="l", cold="blue")
+plot(biomassYear, Biomass, type="l", col="green")
 par(new=F)
 
 #copied code
@@ -97,12 +97,17 @@ lines(Yind, SNOTELsummary$SnowMeltWindow, type="l", col="green")
 
 plot(Yind, snowpeaks, type="l", col="red")
 par(new=T)
-plot(SNOTELsummary$SnowMeltWindow, type="l", col="green")
+plot(Yind, SNOTELsummary$SnowMeltWindow, type="l", col="green")
 par(new=F)
 
 plot(biomassYear, Biomass, type="l", col="blue")
 par(new=T)
-plot(SNOTELsummary$SnowMeltWindow, type="l", col="green")
+plot(biomassYear, SNOTELsummary$SnowMeltWindow[SNOTELsummary$Yind<2013], type="l", col="green")
 par(new=F)
 
+
+plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="")
+par(new=T)
+plot(biomassYear, Biomass, type="l", col="green",ylab="")
+par(new=F)
 
