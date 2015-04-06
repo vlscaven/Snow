@@ -53,3 +53,13 @@ SNOTELsummary =data.frame(Yind,snowpeaks, PrecAcc_in_total, PeakSWEDate, ZeroSWE
 # keeps=c("Yind", "PeakSWEDate", "ZeroSWEDate", "MaxSWE_in")
 #  SNOTELsummary=SNOTELtotals[keeps]
 #  save(SNOTELsummary,file="data/SNOTELsummary.rda")
+
+
+
+#loop for plotting SWE for each year
+for(n in Yind)
+  plot(Niwotdaily$Snow.Water.Equivalent..in.[Yind==n])
+plot(Niwotdaily$rDate[Niwotdaily$Year==1980],Niwotdaily$Snow.Water.Equivalent..in.[Niwotdaily$Year==1980])
+
+for(n in Year)
+  plot(Niwotdaily$rDate[Niwotdaily$Year==n],Niwotdaily$Snow.Water.Equivalent..in.[Niwotdaily$Year==n])
