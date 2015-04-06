@@ -41,4 +41,43 @@ plot(INCnwt$Year[INCnwt$Year>1980], Biomass)
 plot(Biomass, snowpeaks[Yind<2013])
 plot(Yind, snowpeaks)
 plot(biomassYear, Biomass)
+
+
 #need to take 2013-2015 out of snowpeaks to be able to plot against biomass, biomass only goes through 2012
+plot(Yind[Yind<2013], snowpeaks[Yind<2013])
+
+####plotting two variables on the same plot
+#copied from https://stat.ethz.ch/pipermail/r-help/2007-October/144218.html
+> plot(mat,a,type="l",col="red",ylim=c(0,1))
+> lines(mat,b,col="green")
+> lines(mat,c,col="blue")
+
+#playing around with copied code
+plot(biomassYear,snowpeaks[Yind<2013], type="l", col="red")
+lines(biomassYear,Biomass, type="l", col="blue")
+
+> yrange<-range(c(datavector1,datavector2,datavector3))
+> plot(datavector1,type="l",ylim=yrange,col=2)
+lines(datavector2,type="l",col=3)
+
+#copied code from http://cran.r-project.org/doc/contrib/Lemon-kickstart/kr_addat.html
+> plot(6:25,rnorm(20),type="b",xlim=c(1,30),ylim=c(-2.5,2.5),col=2)
+> par(new=T)
+> plot(rnorm(30),type="b",axes=F,col=3)
+> par(new=F)
+#playing around 
+plot(biomassYear, snowpeaks[Yind<2013], type="l", col="red")
+par(new=T)
+plot(Biomass, type="l", cold="blue")
+par(new=F)
+
+#copied code
+> plot(rnorm(100),type="l",col=2)
+> lines(rnorm(100),col=3)
+
+#playing around
+plot(biomassYear, snowpeak[Yind<2013],type="l", col="red")
+lines(Biomass, type="l", col="blue")
+
+
+
