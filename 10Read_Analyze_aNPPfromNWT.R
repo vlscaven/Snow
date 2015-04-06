@@ -101,4 +101,8 @@ plot(SNOTELsummary$SnowMeltWindow, type="l", col="green")
 par(new=F)
 
 plot(biomassYear, Biomass, type="l", col="blue")
-lines
+par(new=T)
+plot(SNOTELsummary$SnowMeltWindow, type="l", col="green")
+par(new=F)
+
+
