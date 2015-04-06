@@ -12,8 +12,8 @@
 
 #setwd("D:/Dropbox/rProjectsShare/Snow/data/FluxData/") 
 #define object SWE as the SWE in Inches from the SNOWnwt dataframe
-SWE = SNOWnwt$SWE_in
-PrecAcc_in=SNOWnwt$PrecAcc_in
+SWE<- Niwotdaily$Snow.Water.Equivalent..in.
+PrecAcc_in<-Niwotdaily$Precipitation.Accumulation..in.
 #define Yind (year index) from the first to the last Water Year
 Yind=(min(wateryear):max(wateryear))
 #limits
