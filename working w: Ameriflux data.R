@@ -50,9 +50,51 @@ par(new=F)
 #creating year range for x axis
 NEEBiomassYear<-1998:2012
 
-plot(NEEBiomassYear, cutBiomass, type="l", col="Forest Green",axes=F, ylab="", xlab="", cex=2)
+plot(NEEBiomassYear, cutBiomass, type="l", col="Forest Green", ylab="", xlab="", cex=2)
 par(new=T)
-plot(NEEBiomassYear, cutmeanAnnNEE, type="l",col="red", axes=F, ylab="", xlab="", cex=2)
+plot(NEEBiomassYear, cutmeanAnnNEE, type="l",col="red", ylab="", xlab="", cex=2, yaxt="n")
+axis(2, at=cutBiomass, labels=Biomass, col.axis="forest green", col.lab="forest green", las=2)
+axis(4, at=NEE, col.axis="red", col.lab="red", las=2)
+mtext("Mean Annual NEE (umol/m2/s))", col.lab="red", side=4,las=0)
+title(main="Biomass and Mean Annual NEE",xlab="Year", ylab="Biomass (kg C per ha)")
+legend("bottomleft", inset=c(-0.2, -0.5), col=c("forest green","red"),lty=1,legend=c("Biomass","NEE"))
+par(xpd=TRUE)
+
+
+#trim snowpeak to 1998-2013
+trimSWEpeak<-SNOTELsummary$snowpeaks[SNOTELsummary$Yind>1997&Yind<2014]
+trimSWEpeak
+thirdplotyear<-1998:2013
+
+#####plot of NEE and snowpeak
+plot(thirdplotyear, trimSWEpeak, type="l", col="blue", ylab="", xlab="", cex=2)
+par(new=T)
+plot(thirdplotyear, meanAnnNEE, type="l",col="red", ylab="", xlab="", cex=2, yaxt="n")
+axis(2, at=trimSWEpeak, labels=trimSWEpeak, col.axis="blue", col.lab="blue", las=2)
+axis(4, at=prettyNEE, col.axis="red", col.lab="red", las=2)
+mtext("Mean Annual NEE (umol/m2/s))", col.lab="red", side=4,las=0)
+title(main="Peak SWE and Mean Annual NEE",xlab="Year", ylab="Peak SWE (in)")
+legend("bottomleft", inset=c(-0.2, -0.5), col=c("blue","red"),lty=1,legend=c("Peak SWE","NEE"))
+par(xpd=TRUE)
+
+NEE<-pretty(cutmeanAnnNEE)
+prettyNEE<-pretty(meanAnnNEE)
+    par(mar=c(5, 4, 4, 5))  
+    plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="", xlab="")
+    par(new=T)
+    plot(biomassYear, Biomass, type="l", col="forest green",ylab="",xlab="", yaxt="n")
+    axis(2, at=snowpeaks, labels=snowpeaks, col.axis="blue", col.lab="blue", las=2)
+    axis(4, at=ryax, col.axis="black", col.lab="forest green", las=2)
+    mtext("Biomass (kg C per ha)", col.lab="forest green", side=4,las=0)
+    title(main="Peak SWE and Biomass",xlab="Year", ylab="Peak SWE (in)")
+    legend("bottomleft", inset=c(-0.2, -0.5), col=c("blue","forest green"),lty=1,legend=c("Peak SWE","Biomass"))
+    par(xpd=TRUE)
+
+
+
+
+
+
 par(new=F)
 axis(1:2, at = NEEBiomassYear)
 axis(4, line =5)
