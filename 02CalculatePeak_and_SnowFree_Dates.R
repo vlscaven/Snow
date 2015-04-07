@@ -49,12 +49,12 @@ doyZeroSWE= as.numeric(strftime(ZeroSWEdate, format = "%j")) #convert to Day of 
 
 #Saved 4 columns Yind, PeakSWEdate, ZeroSWEDate and MaxSWE_in(snowpeaks renamed) 
 
-SNOTELsummary =data.frame(Yind,snowpeaks, PrecAcc_in_total, PeakSWEDate, ZeroSWEdate)
+SNOTELsummary =data.frame(Yind,snowpeaks, PrecAcc_in_total, PeakSWEDate, ZeroSWEdate, doyPeakSWE, doyZeroSWE)
 # keeps=c("Yind", "PeakSWEDate", "ZeroSWEDate", "MaxSWE_in")
 #  SNOTELsummary=SNOTELtotals[keeps]
 #  save(SNOTELsummary,file="data/SNOTELsummary.rda")
 
-
+SNOTELsummary$SnowMeltWindow<-SnowMeltWindow
 
 #loop for plotting SWE for each year
 for(n in Yind)
