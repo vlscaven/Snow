@@ -1,4 +1,4 @@
-plto#Purpose: Create annual, weekly totals for NEE for Niwot Ridge Ameriflux and compare to published estimates from Knowles et al | also plot time series of NEE vs Snowmelt
+#Purpose: Create annual, weekly totals for NEE for Niwot Ridge Ameriflux and compare to published estimates from Knowles et al | also plot time series of NEE vs Snowmelt
 #Author: davidjpmoore@email.arizona.edu
 #Date: 03/11/2015
 #To Do: create rDate for this file
