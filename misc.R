@@ -12,4 +12,12 @@ DoY<-strptime(ZeroSWEdate), "%Y-%m-%d")$yday+1
 
 plot(snowpeaks[Yind<2015], doyZeroSWE[Yind<2015], ylab="", xlab="")
 text(snowpeaks[Yind<2015], doyZeroSWE[Yind<2015], labels=Yind, cex=0.5, pos=3)
-title(main="Peak SWE vs First Day of Growing Season",xlab="Annual Peak SWE (in)", ylab="First Day of Growing Season (DOY)")
+title(main="Peak SWE vs First Day of Zero Snow Cover",xlab="Annual Peak SWE (in)", ylab="First Day of Zero Snow Cover (DOY)")
+
+cor(snowpeaks[Yind<2015], doyZeroSWE[Yind<2015])
+
+##plot of precip and SWE vs biomass
+
+
+###plot of LE vs time
+
