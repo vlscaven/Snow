@@ -30,13 +30,11 @@ meanAnnNEE<-tapply(Ameriflux$NEE_fill..umol.m2.s., Ameriflux$fYear, mean )
 meanAnnNEE
 Biomass
 
-#trim Biomass data to 1998-2012
-cutBiomass<-INCnwt$all[INCnwt$Year>1997]
+#trim Biomass data to 1999-2012
+cutBiomass<-INCnwt$all[INCnwt$Year>1998]
 
-#trim NEE data to 1998-2012 (from 2013)
-cutmeanAnnNEE<-tapply(Ameriflux$NEE_fill..umol.m2.s.[fYear<2013],Ameriflux$fYear[fYear<2013], mean)
-cutmeanAnnNEE
-
+#trim NEE data to 1999-2012
+cutmeanAnnNEE<-tapply(Ameriflux$NEE_fill..umol.m2.s.[fYear<2013&fYear>1998],Ameriflux$fYear[fYear<2013&fYear>1998], mean)
 
 #pasted example from biomass and SWE plots
 plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="")
@@ -48,28 +46,35 @@ par(new=F)
 ###plot of NEE and Biomass
 
 #creating year range for x axis
-NEEBiomassYear<-1998:2012
+NEEBiomassYear<-1999:2012
 
 plot(NEEBiomassYear, cutBiomass, type="l", col="Forest Green", ylab="", xlab="", cex=2)
 par(new=T)
 plot(NEEBiomassYear, cutmeanAnnNEE, type="l",col="red", ylab="", xlab="", cex=2, yaxt="n")
-axis(2, at=cutBiomass, labels=Biomass, col.axis="forest green", col.lab="forest green", las=2)
+axis(2, at=cutBiomass, col.axis="forest green", col.lab="forest green", las=2)
 axis(4, at=NEE, col.axis="red", col.lab="red", las=2)
 mtext("Mean Annual NEE (umol/m2/s))", col.lab="red", side=4,las=0)
 title(main="Biomass and Mean Annual NEE",xlab="Year", ylab="Biomass (kg C per ha)")
 legend("bottomleft", inset=c(-0.2, -0.5), col=c("forest green","red"),lty=1,legend=c("Biomass","NEE"))
 par(xpd=TRUE)
 
+cor(cutBiomass, cutmeanAnnNEE)
 
-#trim snowpeak to 1998-2013
-trimSWEpeak<-SNOTELsummary$snowpeaks[SNOTELsummary$Yind>1997&Yind<2014]
+#trim snowpeak to 1999-2013
+trimSWEpeak<-SNOTELsummary$snowpeaks[SNOTELsummary$Yind>1998&Yind<2014]
 trimSWEpeak
-thirdplotyear<-1998:2013
+thirdplotyear<-1999:2013
+
+#trim NEE to 1999-2013
+trimNEE<-meanAnnNEE[Ameriflux$fYear>1998]
+
+#troubleshooting
+trimNEE<-tapply(Ameriflux$NEE_fill..umol.m2.s.[fYear>1998],Ameriflux$fYear[fYear>1998], mean)
 
 #####plot of NEE and snowpeak
 plot(thirdplotyear, trimSWEpeak, type="l", col="blue", ylab="", xlab="", cex=2)
 par(new=T)
-plot(thirdplotyear, meanAnnNEE, type="l",col="red", ylab="", xlab="", cex=2, yaxt="n")
+plot(thirdplotyear, trimNEE, type="l",col="red", ylab="", xlab="", cex=2, yaxt="n")
 axis(2, at=trimSWEpeak, labels=trimSWEpeak, col.axis="blue", col.lab="blue", las=2)
 axis(4, at=prettyNEE, col.axis="red", col.lab="red", las=2)
 mtext("Mean Annual NEE (umol/m2/s))", col.lab="red", side=4,las=0)
@@ -77,8 +82,11 @@ title(main="Peak SWE and Mean Annual NEE",xlab="Year", ylab="Peak SWE (in)")
 legend("bottomleft", inset=c(-0.2, -0.5), col=c("blue","red"),lty=1,legend=c("Peak SWE","NEE"))
 par(xpd=TRUE)
 
+
+cor(trimSWEpeak, trimNEE)
+
 NEE<-pretty(cutmeanAnnNEE)
-prettyNEE<-pretty(meanAnnNEE)
+prettyNEE<-pretty(trimNEE)
     par(mar=c(5, 4, 4, 5))  
     plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="", xlab="")
     par(new=T)
