@@ -105,9 +105,20 @@ par(new=T)
 plot(biomassYear, SNOTELsummary$SnowMeltWindow[SNOTELsummary$Yind<2013], type="l", col="green")
 par(new=F)
 
-
-plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="")
+###Snowpeaks and biomass vs year
+par(mar=c(5, 4, 4, 5))  
+plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="", xlab="")
 par(new=T)
-plot(biomassYear, Biomass, type="l", col="green",ylab="")
-par(new=F)
+plot(biomassYear, Biomass, type="l", col="forest green",ylab="",xlab="", yaxt="n")
+axis(2, at=snowpeaks, labels=snowpeaks, col.axis="blue", col.lab="blue", las=2)
+axis(4, at=ryax, col.axis="black", col.lab="forest green", las=2)
+mtext("Biomass (kg C per ha)", col.lab="forest green", side=4,las=0)
+title(main="Peak SWE and Biomass",xlab="Year", ylab="Peak SWE (in)")
+legend("bottomleft", inset=c(-0.2, -0.5), col=c("blue","forest green"),lty=1,legend=c("Peak SWE","Biomass"))
+par(xpd=TRUE)
 
+
+"topright", inset=c(-0.2,0)
+ryax<-pretty(Biomass)
+ryax
+Biomass#axis(side, at=, labels=, pos=, lty=, col=, las=, tck=, ...)
