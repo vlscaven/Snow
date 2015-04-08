@@ -18,7 +18,7 @@ MolWtC = 12.0107 #g/mol
 umolToMol = 10^6 #umols in mol
 
 #convert NEE into gC/m & account for 30 minute timesteps
-NEEgm= USNR1$NEE/umolToMol*MolWtC*SecPerTstep 
+NEEgm= Ameriflux$NEE_fill..umol.m2.s./umolToMol*MolWtC*SecPerTstep 
 
 # colnames(USNR1_1999)=AmerifluxCols
 # plot(USNR1_1999$NEE,USNR1_1999$FC)
@@ -45,7 +45,9 @@ USNR1$GAP1 =factor(USNR1$GAP)
 #   geom_point(aes(colour = factor(GAP1)), size = 4, alpha=0.5) 
 
 #calculating annual NEE, GPP, RE totals
-NEE_ann=tapply(NEEgm[USNR1$YEAR>1998],USNR1$YEAR[USNR1$YEAR>1998],sum)
+NEE_ann=tapply(NEEgm[Ameriflux$fYear>1998],Ameriflux$fYear[Ameriflux$fYear>1998],sum)
+NEE_ann
+
 
 #from Table 3 of Knowles et al 2014 John F. Knowles, Sean P. Burns, Peter D. Blanken & Russell K. Monson (2014): Fluxes of energy,water, and carbon dioxide from mountain ecosystems at Niwot Ridge, Colorado, Plant Ecology & Diversity, DOI:10.1080/17550874.2014.904950 To link to this article: http://dx.doi.org/10.1080/17550874.2014.904950
 
