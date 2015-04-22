@@ -56,4 +56,23 @@ meanAnnLE<-tapply(LE.data$LE_fill..W.m2., LYear, mean )
 meanAnnLE
 
 #trimming precipitation down to compare
-trimPrecip<-SNOTELsummary$PrecAcc_in_total[SNOTELsummary]
+trimPrecip<-SNOTELsummary$PrecAcc_in_total[SNOTELsummary$Yind<2013]
+
+##plot precipitation vs biomass
+plot(trimPrecip, Biomass)
+
+##plot precip and biomass vs time
+plot(biomassYear, trimPrecip, type="l", col="blue", ylab="")
+par(new=T)
+plot(biomassYear, Biomass, type="l", col="green",ylab="")
+par(new=F)
+
+##plot precip and SWE and biomass vs time
+plot(biomassYear, snowpeaks[Yind<2013], type="l", col="blue", ylab="")
+par(new=T)
+plot(biomassYear, Biomass, type="l", col="green",ylab="")
+par(new=T)
+plot(biomassYear, trimPrecip, type="l", col="red",ylab="")
+
+
+cor.test(Biomass,trimPrecip)
